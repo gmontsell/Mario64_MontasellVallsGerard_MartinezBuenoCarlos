@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LocationReset : MonoBehaviour, iRestartGame
+public class LocationReset : MonoBehaviour, IRestartGame
 {
 
    [SerializeField] private Transform initPos;

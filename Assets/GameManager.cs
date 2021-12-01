@@ -5,13 +5,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager_Carlitos : MonoBehaviour, iRestartGame
+public class GameManager_Carlitos : MonoBehaviour, IRestartGame
 {
     [SerializeField] private GameObject player;
     [SerializeField] private List<Transform> chekPoints;
     [SerializeField] private TextMeshProUGUI textGameOver;
 
-    List<iRestartGame> restartListeners = new List<iRestartGame>();
+    List<IRestartGame> restartListeners = new List<IRestartGame>();
 
     private int last_chekPoint;
 
@@ -30,29 +30,29 @@ public class GameManager_Carlitos : MonoBehaviour, iRestartGame
 
     public void RestartGame()
     {
-        foreach (iRestartGame l in restartListeners) l.RestartGame();
+        foreach (IRestartGame l in restartListeners) l.RestartGame();
     }
 
-    public void addRestartListener(iRestartGame Listener)
+    public void addRestartListener(IRestartGame Listener)
     {
         restartListeners.Add(Listener);
     }
 
-    public void RemoveRestartListener(iRestartGame Listener)
+    public void RemoveRestartListener(IRestartGame Listener)
     {
         restartListeners.Remove(Listener);
     }
-    //public void gameOver()
-    //{
-    //    player.GetComponent<CharacterController>().enabled = false;
-    //    textGameOver.gameObject.SetActive(true);
-    //    Debug.Log("GG");
+    public void gameOver()
+    {
+        player.GetComponent<CharacterController>().enabled = false;
+        textGameOver.gameObject.SetActive(true);
+        Debug.Log("GG");
 
-    //    if (Input.GetKeyDown(KeyCode.F))
-    //    {
-    //        Restart();
-    //    }
-    //}
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            RestartGame();
+        }
+    }
 
     //public void Restart()
     //{
