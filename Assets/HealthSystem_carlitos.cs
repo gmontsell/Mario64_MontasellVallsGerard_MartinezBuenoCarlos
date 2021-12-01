@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public delegate void DieFunction();
-public class HealthSystem : MonoBehaviour
+public class HealthSystem_carlitos : MonoBehaviour
 {
     [SerializeField] float totalHealth = 100.0f;
-    [SerializeField] GameManager gameManager;
+    [SerializeField] GameManager_Carlitos gameManager;
     private float currentHealth = 100.0f;
     private DieFunction die;
 

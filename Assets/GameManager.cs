@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager_Carlitos : MonoBehaviour, iRestartGame
 {
     [SerializeField] private GameObject player;
     [SerializeField] private List<Transform> chekPoints;
@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
 
     private int last_chekPoint;
 
-    private void Start()
-    {
-        setLastCheckpoint(0);
-    }
+    //private void Start()
+    //{
+    //    setLastCheckpoint(0);
+    //}
 
     private void Update()
     {
@@ -42,40 +42,40 @@ public class GameManager : MonoBehaviour
     {
         restartListeners.Remove(Listener);
     }
-    public void gameOver()
-    {
-        player.GetComponent<CharacterController>().enabled = false;
-        textGameOver.gameObject.SetActive(true);
-        Debug.Log("GG");
+    //public void gameOver()
+    //{
+    //    player.GetComponent<CharacterController>().enabled = false;
+    //    textGameOver.gameObject.SetActive(true);
+    //    Debug.Log("GG");
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Restart();
-        }
-    }
+    //    if (Input.GetKeyDown(KeyCode.F))
+    //    {
+    //        Restart();
+    //    }
+    //}
 
-    public void Restart()
-    {
-        textGameOver.gameObject.SetActive(false);
-        //textGameOver.gameObject.SetActive(false);
+    //public void Restart()
+    //{
+    //    textGameOver.gameObject.SetActive(false);
+    //    //textGameOver.gameObject.SetActive(false);
 
-        if (last_chekPoint == 0)
-        {
-            SceneManager.LoadScene("LevelDesign");
-        }
-        else
-        {
-            player.GetComponent<HealthSystem>().restart();
-            player.GetComponent<CharacterController>().enabled = false;
-            player.transform.position = chekPoints[last_chekPoint].position;
-            player.transform.rotation = chekPoints[last_chekPoint].rotation;
-            player.GetComponent<CharacterController>().enabled = true;
-        }
+    //    if (last_chekPoint == 0)
+    //    {
+    //        SceneManager.LoadScene("LevelDesign");
+    //    }
+    //    else
+    //    {
+    //        player.GetComponent<HealthSystem_carlitos>().restart();
+    //        player.GetComponent<CharacterController>().enabled = false;
+    //        player.transform.position = chekPoints[last_chekPoint].position;
+    //        player.transform.rotation = chekPoints[last_chekPoint].rotation;
+    //        player.GetComponent<CharacterController>().enabled = true;
+    //    }
 
 
-    }
-    public void setLastCheckpoint(int chekPoint)
-    {
-        last_chekPoint = chekPoint;
-    }
+    //}
+    //public void setLastCheckpoint(int chekPoint)
+    //{
+    //    last_chekPoint = chekPoint;
+    //}
 }

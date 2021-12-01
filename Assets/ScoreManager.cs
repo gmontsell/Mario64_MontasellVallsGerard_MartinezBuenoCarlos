@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour, IScoreManager
+public class ScoreManager : MonoBehaviour, IScoreManager_carlitos
 {
     [SerializeField] float points;
     public event ScoreChanged scoreChangedDelegate;
     void Awake()
     {
-        DependencyContainer.AddDependency<IScoreManager>(this);
+        DependencyContainer.AddDependency<IScoreManager_carlitos>(this);
     }
     public void addPoints(float points)
     {

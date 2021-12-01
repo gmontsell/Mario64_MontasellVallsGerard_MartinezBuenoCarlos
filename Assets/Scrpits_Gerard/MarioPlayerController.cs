@@ -10,7 +10,7 @@ public class MarioPlayerController : MonoBehaviour, IRestartGame
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Camera cam;
     [SerializeField] private Transform initialPost;
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] private GameManager_Carlitos gameManager;
     
     [Header("Controls")]
     [SerializeField] private KeyCode forwardKey = KeyCode.W;

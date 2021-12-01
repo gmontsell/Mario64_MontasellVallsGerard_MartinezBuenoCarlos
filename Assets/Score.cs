@@ -9,7 +9,7 @@ public class Score : ScriptableObject
     public float points;
     public void score()
     {
-        IScoreManager score = DependencyContainer.GetDependency<IScoreManager>();
+        IScoreManager_carlitos score = DependencyContainer.GetDependency<IScoreManager_carlitos>();
         score.addPoints(points);
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarioPlayerController_carlitos : MonoBehaviour
+public class MarioPlayerController_carlitos : MonoBehaviour, IRestartGame
 {
     [Header("Components")]
     [SerializeField] private Animator animator;
@@ -25,7 +25,9 @@ public class MarioPlayerController_carlitos : MonoBehaviour
 
     private bool onGround;
     private float verticalSpeed = 0.0f;
- 
+
+
+    [SerializeField] GameManager_Carlitos gm;
 
     private void Update()
     {
@@ -100,5 +102,43 @@ public class MarioPlayerController_carlitos : MonoBehaviour
     {
         verticalSpeed = speedJump;
         animator.SetTrigger("Jump");
+    }
+
+    private Checkpoint_class currentCheckpoint; 
+    public void setCheckpoint(Checkpoint_class checkpoint)
+    {
+        if(currentCheckpoint == null || currentCheckpoint.getIndex() < checkpoint.getIndex())
+        {
+            currentCheckpoint = checkpoint;
+        }
+
+    }
+    private void Start()
+    {
+        gm.addRestartListener(this);
+    }
+    private void OnDestroy()
+    {
+        gm.RemoveRestartListener(this);
+    }
+    private bool resetPos = false;
+    public void RestartGame()
+    {
+        //resetHealth
+        resetPos = true;
+       
+    }
+
+
+    private void LateUpdate()
+    {
+        if (resetPos)
+        {
+            Transform t = currentCheckpoint.getCheckpointTransform();
+            GetComponent<CharacterController>().enabled = false;
+            transform.position = t.position;
+            transform.rotation = t.rotation;
+            resetPos = false;
+        }
     }
 }
