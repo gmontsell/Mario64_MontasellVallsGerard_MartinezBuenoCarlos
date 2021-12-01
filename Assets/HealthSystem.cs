@@ -2,55 +2,53 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public delegate void DieFunction();
 public class HealthSystem : MonoBehaviour
 {
-    [SerializeField] float health = 100.0f;
+    [SerializeField] float totalHealth = 100.0f;
     [SerializeField] GameManager gameManager;
-    private float initialHealth = 0;
+    private float currentHealth = 100.0f;
     private DieFunction die;
 
-    internal void lifeIncrease(float health)
-    {
-        throw new NotImplementedException();
-    }
-
+    public UnityEvent <float, float> healthChanged;
+ 
     public void setDieFunction(DieFunction die)
     {
         this.die = die;
     }
-    public void OnEnable()
-    {
-        initialHealth = health;
-    }
+   
     public void takeDamage(float value)
     {
-        health -= value;
-        if (health <= 0.0f) gameManager.gameOver(); ;
+        currentHealth -= value;
+        healthChanged.Invoke(currentHealth, totalHealth);
+
+        if (totalHealth <= 0.0f) gameManager.gameOver(); 
     }
 
     internal void restart()
     {
-        health = initialHealth;
+        totalHealth = currentHealth;
     }
     public void kill()
     {
-            health = 0;
+            totalHealth = 0;
             gameManager.gameOver();
         
     }
     private void Update()
     {
-        if (health <= 0)
+
+        if (Input.GetKeyDown(KeyCode.H))
         {
-            kill();
+            takeDamage(totalHealth/8.0f);
         }
+        //if (health <= 0)
+        //{
+        //    kill();
+        //}
     }
 
-    internal void takeDamage(object v)
-    {
-        throw new NotImplementedException();
-    }
+ 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Transform> chekPoints;
     [SerializeField] private TextMeshProUGUI textGameOver;
 
+    List<iRestartGame> restartListeners = new List<iRestartGame>();
+
     private int last_chekPoint;
 
     private void Start()
@@ -17,6 +20,28 @@ public class GameManager : MonoBehaviour
         setLastCheckpoint(0);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            RestartGame();
+        }
+    }
+
+    public void RestartGame()
+    {
+        foreach (iRestartGame l in restartListeners) l.RestartGame();
+    }
+
+    public void addRestartListener(iRestartGame Listener)
+    {
+        restartListeners.Add(Listener);
+    }
+
+    public void RemoveRestartListener(iRestartGame Listener)
+    {
+        restartListeners.Remove(Listener);
+    }
     public void gameOver()
     {
         player.GetComponent<CharacterController>().enabled = false;

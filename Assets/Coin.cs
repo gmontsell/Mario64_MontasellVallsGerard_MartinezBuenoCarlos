@@ -5,17 +5,13 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-
-    private int coins = 0;
-
-    internal void coinIncrease(int coin)
+    [SerializeField] Score score;
+    private void OnTriggerEnter(Collider other)
     {
-        coins += coin;
-       
-    }
-
-    private void Update()
-    {
-        Debug.Log(coins);
+        if (score != null)
+        {
+            score.score();
+        }
+        Destroy(gameObject);
     }
 }
