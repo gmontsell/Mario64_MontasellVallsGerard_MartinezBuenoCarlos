@@ -29,7 +29,7 @@ public class Jump_Controller : StateMachineBehaviour
         }
         else if (secondsIdelChange <= secondsCounter)
         {
-            Debug.Log("Change Idle");
+            //Debug.Log("Change Idle");
         }
     }
 

@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public delegate void DieFunction();
-public class HealthSystem_carlitos : MonoBehaviour
+public class HealthSystem : MonoBehaviour
 {
     [SerializeField] float totalHealth = 100.0f;
-    [SerializeField] GameManager_Carlitos gameManager;
+    [SerializeField] GameManager gameManager;
     private float currentHealth = 100.0f;
     private DieFunction die;
 
@@ -24,7 +24,7 @@ public class HealthSystem_carlitos : MonoBehaviour
         currentHealth -= value;
         healthChanged.Invoke(currentHealth, totalHealth);
 
-        if (totalHealth <= 0.0f) gameManager.gameOver(); 
+        if (totalHealth <= 0.0f) kill();
     }
 
     internal void restart()
@@ -43,6 +43,11 @@ public class HealthSystem_carlitos : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             takeDamage(totalHealth/8.0f);
+        }
+
+        if (currentHealth <= 0)
+        {
+            kill();
         }
         //if (health <= 0)
         //{

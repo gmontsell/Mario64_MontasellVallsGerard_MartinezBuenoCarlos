@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b631feb0e8a7834abf7fe1500c9fd50, type: 3}
-  m_Name: Coin
+  m_Name: Score
   m_EditorClassIdentifier: 
   points: 1

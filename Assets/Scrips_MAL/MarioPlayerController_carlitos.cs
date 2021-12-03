@@ -27,7 +27,7 @@ public class MarioPlayerController_carlitos : MonoBehaviour, IRestartGame
     private float verticalSpeed = 0.0f;
 
 
-    [SerializeField] GameManager_Carlitos gm;
+    [SerializeField] GameManager gm;
 
     private void Update()
     {

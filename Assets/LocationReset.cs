@@ -6,7 +6,7 @@ public class LocationReset : MonoBehaviour, IRestartGame
 {
 
    [SerializeField] private Transform initPos;
-   [SerializeField] private GameManager_Carlitos gameManager;
+   [SerializeField] private GameManager gameManager;
     public void RestartGame()
     {
         gameManager.RestartGame();

@@ -5,11 +5,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager_Carlitos : MonoBehaviour, IRestartGame
+public class GameManager : MonoBehaviour, IRestartGame
 {
     [SerializeField] private GameObject player;
     [SerializeField] private List<Transform> chekPoints;
-    [SerializeField] private TextMeshProUGUI textGameOver;
+    //[SerializeField] private TextMeshProUGUI textGameOver;
 
     List<IRestartGame> restartListeners = new List<IRestartGame>();
 
@@ -45,7 +45,7 @@ public class GameManager_Carlitos : MonoBehaviour, IRestartGame
     public void gameOver()
     {
         player.GetComponent<CharacterController>().enabled = false;
-        textGameOver.gameObject.SetActive(true);
+        //textGameOver.gameObject.SetActive(true);
         Debug.Log("GG");
 
         if (Input.GetKeyDown(KeyCode.F))

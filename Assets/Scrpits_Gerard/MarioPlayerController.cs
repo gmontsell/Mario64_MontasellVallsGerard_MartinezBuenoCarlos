@@ -10,7 +10,7 @@ public class MarioPlayerController : MonoBehaviour, IRestartGame
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Camera cam;
     [SerializeField] private Transform initialPost;
-    [SerializeField] private GameManager_Carlitos gameManager;
+    [SerializeField] private GameManager gameManager;
     
     [Header("Controls")]
     [SerializeField] private KeyCode forwardKey = KeyCode.W;
@@ -30,6 +30,9 @@ public class MarioPlayerController : MonoBehaviour, IRestartGame
 
     private bool onGround;
     private float verticalSpeed = 0.0f;
+
+    private Checkpoint_class currentCheckpoint;
+    
     private void OnEnable()
     {
         //gameManager.addRestartListener(this);
@@ -111,9 +114,47 @@ public class MarioPlayerController : MonoBehaviour, IRestartGame
         numJump = 0;
     }
 
+    //public void RestartGame()
+    //{
+    //    transform.position = initialPost.position;
+    //    transform.rotation = initialPost.rotation;
+    //}
+    
+
+    public void setCheckpoint(Checkpoint_class checkpoint)
+    {
+        if (currentCheckpoint == null || currentCheckpoint.getIndex() < checkpoint.getIndex())
+        {
+            currentCheckpoint = checkpoint;
+        }
+
+    }
+    private void Start()
+    {
+        gameManager.addRestartListener(this);
+    }
+    private void OnDestroy()
+    {
+        gameManager.RemoveRestartListener(this);
+    }
+    private bool resetPos = false;
     public void RestartGame()
     {
-        transform.position = initialPost.position;
-        transform.rotation = initialPost.rotation;
+        //resetHealth
+        resetPos = true;
+
+    }
+
+
+    private void LateUpdate()
+    {
+        if (resetPos)
+        {
+            Transform t = currentCheckpoint.getCheckpointTransform();
+            GetComponent<CharacterController>().enabled = false;
+            transform.position = t.position;
+            transform.rotation = t.rotation;
+            resetPos = false;
+        }
     }
 }
