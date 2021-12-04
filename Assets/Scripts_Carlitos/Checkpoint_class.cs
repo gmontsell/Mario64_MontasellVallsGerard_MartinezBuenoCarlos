@@ -8,7 +8,7 @@ public class Checkpoint_class : MonoBehaviour
     [SerializeField] private int index;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out MarioPlayerController_carlitos mario)){
+        if(other.gameObject.TryGetComponent(out MarioPlayerController mario)){
             mario.setCheckpoint(this);
         }
 
