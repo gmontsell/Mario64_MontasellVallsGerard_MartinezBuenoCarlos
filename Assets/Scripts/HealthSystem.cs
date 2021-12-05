@@ -7,11 +7,11 @@ using UnityEngine.Events;
 public delegate void DieFunction();
 public class HealthSystem : MonoBehaviour
 {
-    [SerializeField] float totalHealth = 80.0f;
+    [SerializeField] float totalHealth = 100.0f;
     [SerializeField] GameManager gameManager;
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject healthImage;
-    private float currentHealth = 80.0f;
+    private float currentHealth = 100.0f;
     private DieFunction die;
 
     public UnityEvent <float, float> healthChanged;
@@ -33,6 +33,15 @@ public class HealthSystem : MonoBehaviour
     internal void restart()
     {
         totalHealth = currentHealth;
+        healthChanged.Invoke(currentHealth, totalHealth);
+        showHealthColdown();
+    }
+
+    public void  HealthUp()
+    {
+        totalHealth = currentHealth;
+        healthChanged.Invoke(currentHealth, totalHealth);
+        showHealthColdown();
     }
     public void kill()
     {
@@ -57,7 +66,7 @@ public class HealthSystem : MonoBehaviour
     private IEnumerator showHealthColdown()
     {
         healthImage.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(5.0f);
         healthImage.SetActive(false);
     }
 

@@ -140,7 +140,7 @@ public class MarioPlayerController : MonoBehaviour, IRestartGame
     private bool resetPos = false;
     public void RestartGame()
     {
-        //resetHealth
+        
         resetPos = true;
 
     }

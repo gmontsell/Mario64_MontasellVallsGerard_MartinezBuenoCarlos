@@ -12,6 +12,7 @@ public class Jump_Controller : StateMachineBehaviour
    
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        secondsCounter = 0.0f;
         marioCont = animator.gameObject.GetComponent<MarioPlayerController>();
         animator.SetBool("IdleCrouch", false);
     }

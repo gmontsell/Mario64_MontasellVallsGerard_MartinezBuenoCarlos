@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour, IRestartGame
 {
     [SerializeField] private GameObject player;
     [SerializeField] private List<Transform> chekPoints;
-    //[SerializeField] private TextMeshProUGUI textGameOver;
+    [SerializeField] private TextMeshProUGUI textGameOver;
 
     List<IRestartGame> restartListeners = new List<IRestartGame>();
 
@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour, IRestartGame
 
     public void RestartGame()
     {
-        foreach (IRestartGame l in restartListeners) l.RestartGame();
+
+        SceneManager.LoadScene("MainScene");
+       // foreach (IRestartGame l in restartListeners) l.RestartGame();
     }
 
     public void addRestartListener(IRestartGame Listener)
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour, IRestartGame
     public void gameOver()
     {
         player.GetComponent<CharacterController>().enabled = false;
-        //textGameOver.gameObject.SetActive(true);
+        textGameOver.gameObject.SetActive(true);
         Debug.Log("GG");
 
         if (Input.GetKeyDown(KeyCode.F))
